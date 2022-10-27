@@ -12,6 +12,10 @@ RUN apk add --no-cache \
     php8-fpm \
     php8-opcache \
     php8-gd \
+    php8-tokenizer \
+    php8-dom \
+    php8-xmlwriter \
+    php8-fileinfo \
     php8-zlib \
     php8-curl \
     php8-bcmath \
@@ -67,6 +71,7 @@ RUN apk add nginx
 # Copy default config and paste it into nginx config path inside docker.
 COPY ./default.conf /etc/nginx/conf.d/default.conf
 COPY ./php.ini /etc/php8/php.ini
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin --filename=composer 
 
 # Expose port to be visible outside the container.
 EXPOSE 80
